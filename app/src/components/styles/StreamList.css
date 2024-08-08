@@ -1,35 +1,12 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #121212;
-  color: #fff;
-  margin: 0;
-  padding: 0;
-}
-
-nav {
-  background-color: #1f1f1f;
-  padding: 10px;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* StreamList.css */
+.streamlist-container {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
-nav ul li {
-  margin: 0 10px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #ff4500;
-  font-weight: bold;
-}
-
-form {
+.streamlist-form {
   margin: 20px 0;
   display: flex;
   flex-direction: column;
@@ -52,6 +29,11 @@ input[type="text"] {
   width: 300px;
 }
 
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
 button {
   padding: 10px 20px;
   border: none;
@@ -60,21 +42,41 @@ button {
   color: #fff;
   cursor: pointer;
   font-size: 1em;
+  transition: background-color 0.3s;
 }
 
 button:hover {
   background-color: #ff5722;
 }
 
-ul {
+ul.movie-list {
   list-style: none;
   padding: 0;
+  width: 300px;
 }
 
-ul li {
+ul.movie-list .movie-item {
+  position: relative;
   background-color: #1f1f1f;
   margin: 5px 0;
   padding: 10px;
   border: 1px solid #ff4500;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-button {
+  background-color: #ff4500;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #ff5722;
 }

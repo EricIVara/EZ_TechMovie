@@ -1,0 +1,123 @@
+/* src/components/styles/SignUp.css */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #121212;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  background-color: #1f1f1f;
+}
+
+.logo {
+  height: 40px;
+}
+
+.signup-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.signup-form-container {
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 40px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.signup-form-container h1 {
+  margin-bottom: 20px;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-form input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+}
+
+.signup-form button {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #e50914;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.signup-form button:hover {
+  background-color: #f40612;
+}
+
+.signup-options {
+  margin-top: 20px;
+  font-size: 0.9em;
+}
+
+.signup-options a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.signup-options a:hover {
+  text-decoration: underline;
+}
+
+.signup-footer {
+  width: 100%;
+  padding: 20px 0;
+  background-color: #1f1f1f;
+  text-align: center;
+}
+
+.signup-footer p {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.signup-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.signup-footer ul li {
+  margin: 0 10px;
+}
+
+.signup-footer ul li a {
+  color: #b3b3b3;
+  text-decoration: none;
+}
+
+.signup-footer ul li a:hover {
+  text-decoration: underline;
+}
