@@ -1,18 +1,16 @@
 // src/components/Layout.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom"; // Import Outlet from react-router-dom
+import Navigation from "./Navigation";
 import "./styles/Layout.css";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <div className="layout">
-      <nav className="navbar">
-        <Link to="/streamlist">StreamList</Link>
-        <Link to="/movies">Movies</Link>
-        <Link to="/cart">Cart</Link>
-        <Link to="/about">About</Link>
-      </nav>
-      <main>{children}</main>
+      <Navigation />
+      <main>
+        <Outlet />{" "}
+      </main>
     </div>
   );
 };
