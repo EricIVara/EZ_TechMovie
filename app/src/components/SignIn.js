@@ -51,7 +51,6 @@ const SignIn = () => {
             />
             <button type="submit">Sign In</button>
             <div className="signin-options">
-              <a href="#">Use a Sign-In Code</a>
               <a href="#">Forgot password?</a>
             </div>
             <div className="signin-remember">
