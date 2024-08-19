@@ -72,6 +72,30 @@ ul.movie-list .movie-item {
   align-items: center;
 }
 
+.movie-item img {
+  width: 50px;
+  height: 75px;
+  margin-right: 10px;
+}
+
+.movie-item div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Ensures the div takes up available space */
+}
+
+.movie-item strong {
+  font-size: 1.2em;
+  color: #fff;
+  text-align: left; /* Ensure text alignment is left */
+}
+
+.movie-item p {
+  margin: 0;
+  color: #ccc;
+  text-align: left; /* Ensure text alignment is left */
+}
+
 .delete-button {
   background-color: #ff4500;
   color: #fff;
@@ -79,6 +103,7 @@ ul.movie-list .movie-item {
   padding: 5px 10px;
   border-radius: 3px;
   cursor: pointer;
+  margin-left: 10px;
   transition: background-color 0.3s;
 }
 
@@ -127,12 +152,6 @@ ul.movie-list .movie-item {
   background-color: #ff4500;
 }
 
-.movie-item img {
-  width: 50px;
-  height: 75px;
-  margin-right: 10px;
-}
-
 /* Detailed Movie View */
 .movie-details {
   margin-top: 20px;
@@ -147,10 +166,11 @@ ul.movie-list .movie-item {
 .movie-details-container {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: space-between; /* Adjusted to ensure space distribution */
   width: 100%;
   max-width: 1000px;
   margin-bottom: 20px;
+  box-sizing: border-box; /* Ensure padding and borders are included in the width */
 }
 
 .movie-details img {
@@ -164,7 +184,9 @@ ul.movie-list .movie-item {
 .movie-info {
   display: flex;
   flex-direction: column;
-  max-width: 600px;
+  flex-grow: 1; /* Ensure this takes up remaining space */
+  margin-left: 20px; /* Add space between the poster and text */
+  overflow: visible; /* Ensure no content is clipped */
 }
 
 .movie-info h2 {
@@ -236,8 +258,12 @@ input[type="text"]:focus {
   }
 
   .movie-details img {
-    width: 100%;
-    margin: 0 0 20px 0;
+    width: 300px; /* Fixed width for the poster */
+    height: auto;
+    margin-right: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0; /* Ensure the image doesn't shrink */
   }
 
   .movie-info {

@@ -10,6 +10,8 @@ const StreamList = () => {
   const [suggestedMovies, setSuggestedMovies] = useState([]);
   const [selectedMovieDetails, setSelectedMovieDetails] = useState(null);
   const [error, setError] = useState("");
+  const [addedMovies, setAddedMovies] = useState([]);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -45,6 +47,8 @@ const StreamList = () => {
         `http://www.omdbapi.com/?t=${name}&apikey=97266cde`
       );
       const data = await response.json();
+      console.log("Fetched Movie Data:", data);
+
       if (data.Response === "True") {
         return data;
       } else {
@@ -60,7 +64,7 @@ const StreamList = () => {
   const handleInputChange = (e) => {
     const query = e.target.value;
     setMovieName(query);
-    setSelectedMovieDetails(null); // Clear selected movie details when typing
+    setSelectedMovieDetails(null);
 
     if (query.length > 2) {
       fetchMovieSuggestions(query);
@@ -75,7 +79,8 @@ const StreamList = () => {
     const movieDetails = await fetchMovieDetails(movie.Title);
     if (movieDetails) {
       setSelectedMovieDetails(movieDetails);
-      setError(""); // Clear any previous errors
+      setError("");
+      console.log("Set Movie Details:", movieDetails);
     }
   };
 
@@ -89,10 +94,29 @@ const StreamList = () => {
     const movieDetails = await fetchMovieDetails(movieName);
     if (movieDetails) {
       setSelectedMovieDetails(movieDetails);
-      setError(""); // Clear any errors on success
+      setError("");
     } else {
       setError("Please select a movie from the suggestions.");
     }
+  };
+
+  const handleAddClick = () => {
+    if (!selectedMovieDetails) {
+      setError("Please select a movie to add.");
+      return;
+    }
+
+    setAddedMovies((prevMovies) => [...prevMovies, selectedMovieDetails]);
+
+    setError("");
+  };
+
+  const handleEditClick = () => {
+    setIsEditMode(!isEditMode);
+  };
+
+  const handleDeleteClick = (index) => {
+    setAddedMovies((prevMovies) => prevMovies.filter((_, i) => i !== index));
   };
 
   return (
@@ -120,49 +144,97 @@ const StreamList = () => {
           </ul>
         )}
         <div className="button-group">
-          <button type="submit">View Details</button>
+          <button type="button" onClick={handleAddClick}>
+            Add
+          </button>
+          <button type="button" onClick={handleEditClick}>
+            Edit
+          </button>
         </div>
       </form>
-
+      {addedMovies.length > 0 && (
+        <div className="added-movies-list">
+          <h3>Added Movies:</h3>
+          <ul className="movie-list">
+            {addedMovies.map((movie, index) => (
+              <li key={index} className="movie-item">
+                <img src={movie.Poster} alt={movie.Title} />
+                <div>
+                  <strong>{movie.Title}</strong>
+                  <p>{movie.Year}</p>
+                </div>
+                {isEditMode && (
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDeleteClick(index)}
+                  >
+                    Delete
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {error && <p className="error">{error}</p>}
-
       {selectedMovieDetails && (
-        <div className="movie-details">
-          <h2>{selectedMovieDetails.Title}</h2>
+        <>
+          {console.log(selectedMovieDetails)}
+
           <div className="movie-details-container">
             <img
               src={selectedMovieDetails.Poster}
               alt={selectedMovieDetails.Title}
             />
             <div className="movie-info">
-              <p>
-                <strong>Year:</strong> {selectedMovieDetails.Year}
-              </p>
-              <p className="rating-badge">
-                Ratings: {selectedMovieDetails.Rated}
-              </p>
-              <p>
-                <strong>Released:</strong> {selectedMovieDetails.Released}
-              </p>
-              <p className="genre-badge">Genre: {selectedMovieDetails.Genre}</p>
-              <p>
-                <strong>Writer:</strong> {selectedMovieDetails.Writer}
-              </p>
-              <p>
-                <strong>Actors:</strong> {selectedMovieDetails.Actors}
-              </p>
-              <p>
-                <strong>Plot:</strong> {selectedMovieDetails.Plot}
-              </p>
-              <p className="language">
-                <strong>Language:</strong> {selectedMovieDetails.Language}
-              </p>
-              <p className="awards">
-                <strong>Awards:</strong> {selectedMovieDetails.Awards}
-              </p>
+              {selectedMovieDetails.Year && (
+                <p>
+                  <strong>Year:</strong> {selectedMovieDetails.Year}
+                </p>
+              )}
+              {selectedMovieDetails.Rated && (
+                <p className="rating-badge">
+                  Ratings: {selectedMovieDetails.Rated}
+                </p>
+              )}
+              {selectedMovieDetails.Released && (
+                <p>
+                  <strong>Released:</strong> {selectedMovieDetails.Released}
+                </p>
+              )}
+              {selectedMovieDetails.Genre && (
+                <p className="genre-badge">
+                  Genre: {selectedMovieDetails.Genre}
+                </p>
+              )}
+              {selectedMovieDetails.Writer && (
+                <p>
+                  <strong>Writer:</strong> {selectedMovieDetails.Writer}
+                </p>
+              )}
+              {selectedMovieDetails.Actors && (
+                <p>
+                  <strong>Actors:</strong> {selectedMovieDetails.Actors}
+                </p>
+              )}
+              {selectedMovieDetails.Plot && (
+                <p>
+                  <strong>Plot:</strong> {selectedMovieDetails.Plot}
+                </p>
+              )}
+              {selectedMovieDetails.Language && (
+                <p className="language">
+                  <strong>Language:</strong> {selectedMovieDetails.Language}
+                </p>
+              )}
+              {selectedMovieDetails.Awards && (
+                <p className="awards">
+                  <strong>Awards:</strong> {selectedMovieDetails.Awards}
+                </p>
+              )}
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
