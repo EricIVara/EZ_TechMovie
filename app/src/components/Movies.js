@@ -130,7 +130,7 @@ const Movies = () => {
           <h2>{category}</h2>
           <div className="movies-row">
             {filteredMovies(categories[category]).map((movie) => (
-              <div key={movie.id} className="movie-item">
+              <div key={movie.id} className="movie-items">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
