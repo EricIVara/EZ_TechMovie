@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styles from "./styles/MovieDetails.module.css"; // Correctly import the CSS module
+import styles from "./styles/MovieDetails.module.css";
 
 const MovieDetails = () => {
-  const { id } = useParams(); // Get movie ID from URL
+  const { id } = useParams();
   const [movie, setMovie] = useState(null);
-  const API_KEY = "45399c19cb236ff3e060513edb446ac8";
+  const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -21,7 +21,7 @@ const MovieDetails = () => {
     };
 
     fetchMovieDetails();
-  }, [id]);
+  }, [id, API_KEY]);
 
   if (!movie) {
     return <div className={styles.loading}>Loading...</div>;
@@ -52,7 +52,7 @@ const MovieDetails = () => {
           </p>
           <p>
             <strong>Genres:</strong>{" "}
-            {movie.genres.map((genre) => genre.name).join(", ")}
+            {movie.genres && movie.genres.map((genre) => genre.name).join(", ")}
           </p>
           <p>
             <strong>Runtime:</strong> {movie.runtime} minutes

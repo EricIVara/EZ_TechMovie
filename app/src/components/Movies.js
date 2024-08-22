@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "./styles/Movies.module.css"; // Correctly import the CSS module
+import styles from "./styles/Movies.module.css";
 
 const Movies = () => {
   const [featuredMovie, setFeaturedMovie] = useState(null);
@@ -15,7 +15,7 @@ const Movies = () => {
   const [selectedRating, setSelectedRating] = useState(
     localStorage.getItem("selectedRating") || ""
   );
-  const API_KEY = "45399c19cb236ff3e060513edb446ac8";
+  const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -62,7 +62,7 @@ const Movies = () => {
 
     fetchMovies();
     fetchGenres();
-  }, []);
+  }, [API_KEY]); // Added API_KEY to the dependency array
 
   useEffect(() => {
     localStorage.setItem("selectedGenre", selectedGenre);
@@ -153,28 +153,29 @@ const Movies = () => {
         <div key={category} className={styles.movieCategory}>
           <h2>{category}</h2>
           <div className={styles.moviesRow}>
-            {filteredMovies(categories[category]).map((movie) => (
-              <Link to={`/movie/${movie.id}`} key={movie.id}>
-                <div className={styles.movieItems}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
-                    className={styles.moviePoster}
-                    loading="lazy"
-                  />
-                  <div className={styles.movieInfo}>
-                    <h2 className={styles.movieTitle}>{movie.title}</h2>
-                    <p className={styles.movieYear}>
-                      Year: {new Date(movie.release_date).getFullYear()}
-                    </p>
-                    <p className={styles.movieRating}>
-                      Rating: {movie.vote_average}
-                    </p>
-                    <p className={styles.movieOverview}>{movie.overview}</p>
+            {categories[category] &&
+              filteredMovies(categories[category]).map((movie) => (
+                <Link to={`/movie/${movie.id}`} key={movie.id}>
+                  <div className={styles.movieItems}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      alt={movie.title}
+                      className={styles.moviePoster}
+                      loading="lazy"
+                    />
+                    <div className={styles.movieInfo}>
+                      <h2 className={styles.movieTitle}>{movie.title}</h2>
+                      <p className={styles.movieYear}>
+                        Year: {new Date(movie.release_date).getFullYear()}
+                      </p>
+                      <p className={styles.movieRating}>
+                        Rating: {movie.vote_average}
+                      </p>
+                      <p className={styles.movieOverview}>{movie.overview}</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
           </div>
         </div>
       ))}
