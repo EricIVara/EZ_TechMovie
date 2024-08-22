@@ -2,9 +2,10 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
-// Your web app's Firebase configuration
+console.log("Firebase API Key:", process.env.REACT_APP_FIREBASE_API_KEY);
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCZsQMfgWx0Qa0hsxCrHO7BngQuTi17sHM",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "streamlist-17947.firebaseapp.com",
   projectId: "streamlist-17947",
   storageBucket: "streamlist-17947.appspot.com",

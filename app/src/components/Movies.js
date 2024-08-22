@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
-import "./styles/Movies.css";
+import { Link } from "react-router-dom";
+import styles from "./styles/Movies.module.css"; // Correctly import the CSS module
 
 const Movies = () => {
   const [featuredMovie, setFeaturedMovie] = useState(null);
   const [categories, setCategories] = useState({});
   const [genres, setGenres] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [selectedYear, setSelectedYear] = useState("");
-  const [selectedRating, setSelectedRating] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState(
+    localStorage.getItem("selectedGenre") || ""
+  );
+  const [selectedYear, setSelectedYear] = useState(
+    localStorage.getItem("selectedYear") || ""
+  );
+  const [selectedRating, setSelectedRating] = useState(
+    localStorage.getItem("selectedRating") || ""
+  );
   const API_KEY = "45399c19cb236ff3e060513edb446ac8";
 
   useEffect(() => {
@@ -57,6 +64,18 @@ const Movies = () => {
     fetchGenres();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("selectedGenre", selectedGenre);
+  }, [selectedGenre]);
+
+  useEffect(() => {
+    localStorage.setItem("selectedYear", selectedYear);
+  }, [selectedYear]);
+
+  useEffect(() => {
+    localStorage.setItem("selectedRating", selectedRating);
+  }, [selectedRating]);
+
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
   };
@@ -84,23 +103,28 @@ const Movies = () => {
     });
 
   return (
-    <div className="movies-container">
+    <div className={styles.moviesContainer}>
       {featuredMovie && (
         <div
-          className="featured-movie"
+          className={styles.featuredMovie}
           style={{
             backgroundImage: `url(https://image.tmdb.org/t/p/original${featuredMovie.backdrop_path})`,
           }}
         >
-          <h1>{featuredMovie.title}</h1>
-          <p>{featuredMovie.overview}</p>
-          <div className="buttons">
-            <button>Play</button>
-            <button>More Info</button>
+          <div className={styles.featuredContent}>
+            <h1>{featuredMovie.title}</h1>
+            <p>{featuredMovie.overview}</p>
+            <div className={styles.buttons}>
+              <button>Play</button>
+              <Link to={`/movie/${featuredMovie.id}`}>
+                <button>More Info</button>
+              </Link>
+            </div>
           </div>
+          <div className={styles.fadeBottom}></div>
         </div>
       )}
-      <div className="filters">
+      <div className={styles.filters}>
         <select value={selectedGenre} onChange={handleGenreChange}>
           <option value="">All Genres</option>
           {genres.map((genre) => (
@@ -114,7 +138,7 @@ const Movies = () => {
           placeholder="Year"
           value={selectedYear}
           onChange={handleYearChange}
-          className="filter-input"
+          className={styles.filterInput}
         />
         <input
           type="number"
@@ -122,30 +146,34 @@ const Movies = () => {
           placeholder="Rating"
           value={selectedRating}
           onChange={handleRatingChange}
-          className="filter-input"
+          className={styles.filterInput}
         />
       </div>
       {Object.keys(categories).map((category) => (
-        <div key={category} className="movie-category">
+        <div key={category} className={styles.movieCategory}>
           <h2>{category}</h2>
-          <div className="movies-row">
+          <div className={styles.moviesRow}>
             {filteredMovies(categories[category]).map((movie) => (
-              <div key={movie.id} className="movie-items">
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                  className="movie-poster"
-                  loading="lazy"
-                />
-                <div className="movie-info">
-                  <h2 className="movie-title">{movie.title}</h2>
-                  <p className="movie-year">
-                    Year: {new Date(movie.release_date).getFullYear()}
-                  </p>
-                  <p className="movie-rating">Rating: {movie.vote_average}</p>
-                  <p className="movie-overview">{movie.overview}</p>
+              <Link to={`/movie/${movie.id}`} key={movie.id}>
+                <div className={styles.movieItems}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    className={styles.moviePoster}
+                    loading="lazy"
+                  />
+                  <div className={styles.movieInfo}>
+                    <h2 className={styles.movieTitle}>{movie.title}</h2>
+                    <p className={styles.movieYear}>
+                      Year: {new Date(movie.release_date).getFullYear()}
+                    </p>
+                    <p className={styles.movieRating}>
+                      Rating: {movie.vote_average}
+                    </p>
+                    <p className={styles.movieOverview}>{movie.overview}</p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

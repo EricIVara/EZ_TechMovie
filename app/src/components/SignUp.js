@@ -1,9 +1,9 @@
-// src/components/SignUp.js
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { FaHome } from "react-icons/fa"; // Import the icon used in Navigation
 import { auth } from "../firebase";
-import "./styles/SignUp.css";
+import styles from "./styles/SignUp.module.css"; // Correctly import the CSS module
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -27,15 +27,21 @@ const SignUp = () => {
   };
 
   return (
-    <div className="signup-container">
-      <header className="signup-header">
-        <img src="/logo192.png" alt="StreamList Logo" className="logo" />
+    <div className={styles.signupContainer}>
+      <header className={styles.signupHeader}>
+        <div className={styles.logo}>
+          <FaHome className={styles.logoIcon} />
+          <Link to="/streamlist" className={styles.logoText}>
+            <span className={styles.stream}>Stream</span>
+            <span className={styles.list}>List</span>
+          </Link>
+        </div>
       </header>
-      <main className="signup-main">
-        <div className="signup-form-container">
-          <h1>Sign Up</h1>
-          {error && <p className="error">{error}</p>}
-          <form className="signup-form" onSubmit={handleSignUp}>
+      <main className={styles.signupMain}>
+        <div className={styles.signupFormContainer}>
+          <h1>Create Your Account</h1>
+          {error && <p className={styles.error}>{error}</p>}
+          <form className={styles.signupForm} onSubmit={handleSignUp}>
             <input
               type="email"
               placeholder="Email or mobile number"
@@ -52,20 +58,20 @@ const SignUp = () => {
             />
             <input
               type="password"
-              placeholder="Repeat Password"
+              placeholder="Confirm Password"
               value={repeatPassword}
               onChange={(e) => setRepeatPassword(e.target.value)}
               required
             />
             <button type="submit">Sign Up</button>
-            <div className="signup-options">
-              <span>Already have an account? </span>
-              <a onClick={() => navigate("/signin")}>Sign in now.</a>
-            </div>
           </form>
+          <div className={styles.signupOptions}>
+            <span>Already have an account? </span>
+            <a onClick={() => navigate("/signin")}>Sign in now.</a>
+          </div>
         </div>
       </main>
-      <footer className="signup-footer">
+      <footer className={styles.signupFooter}>
         <p>Questions? Call 1-800-123-4567</p>
         <ul>
           <li>

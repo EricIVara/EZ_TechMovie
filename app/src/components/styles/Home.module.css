@@ -1,0 +1,243 @@
+/* Home.module.css */
+
+:root {
+  --primary-color: #e50914;
+  --header-background-color: #141414;
+  --background-color: #000;
+  --text-color: #fff;
+  --button-hover-color: #f40612;
+  --input-background-color: #333;
+}
+
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  background-color: #000;
+}
+
+.homeHeader {
+  background-color: var(--header-background-color);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; /* Center align the items */
+  padding: 20px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px; /* Set a fixed height for the header */
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+}
+
+.authButtons button {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.authButtons button:hover {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.hero {
+  position: relative;
+  height: calc(80vh - 70px); /* Subtract header height from hero section */
+  background-image: url("https://source.unsplash.com/1600x900/?cinema,movies");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  box-shadow: inset 0 -100px 100px -50px rgba(0, 0, 0, 0.7);
+  color: var(--text-color);
+  margin-top: 70px; /* Ensure hero starts below the header */
+}
+
+.heroContent {
+  z-index: 1;
+  max-width: 600px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.hero h1 {
+  font-size: 3.5em;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.hero p {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #e5e5e5;
+}
+
+.signupForm {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.signupForm input {
+  padding: 15px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px 0 0 5px;
+  background-color: #333;
+  color: var(--text-color);
+  flex-grow: 1;
+  max-width: 300px;
+  font-size: 1em;
+}
+
+.signupForm button {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.signupForm button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.fadeBottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15vh;
+  background-image: linear-gradient(
+    180deg,
+    transparent,
+    rgba(20, 20, 20, 0.61),
+    #141414
+  );
+}
+
+.features {
+  padding: 60px 20px;
+  background-color: #141414;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.feature {
+  margin: 40px 0;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: #222;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.feature h2 {
+  color: #ff4500;
+  margin-bottom: 15px;
+  font-size: 2em;
+}
+
+.feature p {
+  font-size: 1.2em;
+  color: #e5e5e5;
+}
+
+.faq {
+  padding: 60px 20px;
+  background-color: var(--header-background-color);
+  color: var(--text-color);
+}
+
+.faq h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+  color: #ff4500;
+}
+
+.faqItem {
+  margin-bottom: 20px;
+}
+
+.faqQuestion {
+  width: 100%;
+  background-color: #222;
+  color: var(--primary-color);
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1.2em;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.faqQuestion:hover {
+  background-color: var(--button-hover-color);
+}
+
+.faqAnswer {
+  background-color: #333;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  display: none;
+}
+
+.footer {
+  background-color: var(--header-background-color);
+  padding: 40px 20px;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer ul li {
+  margin: 0 15px;
+}
+
+.footer ul li a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5em;
+  }
+
+  .hero p {
+    font-size: 1.2em;
+  }
+
+  .signupForm input,
+  .signupForm button {
+    font-size: 0.9em;
+    padding: 10px;
+  }
+}

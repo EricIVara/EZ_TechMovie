@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaHome, FaFilm, FaShoppingCart, FaInfoCircle } from "react-icons/fa";
 import { auth } from "../firebase";
-import "./styles/Navigation.css";
+import styles from "./styles/Navigation.module.css";
 
 const Navigation = () => {
   const [userEmail, setUserEmail] = useState(null);
@@ -28,34 +28,36 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="navigation">
-      <div className="logo">
-        <FaHome className="logo-icon" />
-        <Link to="/streamlist" className="logo-text">
-          <span className="stream">Stream</span>
-          <span className="list">List</span>
+    <nav className={styles.navigation}>
+      <div className={styles.logo}>
+        <FaHome className={styles.logoIcon} />
+        <Link to="/streamlist" className={styles.logoText}>
+          <span className={styles.stream}>Stream</span>
+          <span className={styles.list}>List</span>
         </Link>
       </div>
-      <ul className="nav-links">
+      <ul className={styles.navLinks}>
         <li>
-          <Link to="/movies">
-            <FaFilm /> Movies
+          <Link to="/movies" className={styles.navLink}>
+            <FaFilm className={styles.navIcon} /> Movies
           </Link>
         </li>
         <li>
-          <Link to="/cart">
-            <FaShoppingCart /> Cart
+          <Link to="/cart" className={styles.navLink}>
+            <FaShoppingCart className={styles.navIcon} /> Cart
           </Link>
         </li>
         <li>
-          <Link to="/about">
-            <FaInfoCircle /> About
+          <Link to="/about" className={styles.navLink}>
+            <FaInfoCircle className={styles.navIcon} /> About
           </Link>
         </li>
       </ul>
       {userEmail && (
-        <div className="user-email">
-          <button onClick={handleLogout}>{userEmail}</button>
+        <div className={styles.userEmail}>
+          <button onClick={handleLogout} className={styles.logoutButton}>
+            {userEmail}
+          </button>
         </div>
       )}
     </nav>

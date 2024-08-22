@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Layout from "./components/Layout";
+import MovieDetails from "./components/MovieDetails";
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route element={<Layout />}>
-            <Route path="/streamlist" element={<StreamList />} />{" "}
+            <Route path="/streamlist" element={<StreamList />} />
             <Route path="/movies" element={<Movies />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/about" element={<About />} />
+            <Route path="/movie/:id" element={<MovieDetails />} />{" "}
           </Route>
         </Routes>
       </div>

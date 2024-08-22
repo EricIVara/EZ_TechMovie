@@ -1,7 +1,6 @@
-// src/components/Home.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./styles/Home.css";
+import styles from "./styles/Home.module.css"; // Correctly import the CSS module
 
 const Home = () => {
   const navigate = useNavigate();
@@ -11,71 +10,72 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <header className="home-header">
-        <div className="auth-buttons">
-          <button className="signin-btn" onClick={handleSignIn}>
+    <div className={styles.homeContainer}>
+      <header className={styles.homeHeader}>
+        <div className={styles.authButtons}>
+          <button className={styles.signinBtn} onClick={handleSignIn}>
             Sign In
           </button>
         </div>
       </header>
       <main>
-        <section className="hero">
-          <div className="hero-content">
+        <section className={styles.hero}>
+          <div className={styles.heroContent}>
             <h1>Unlimited movies, TV shows, and more</h1>
             <p>Watch anywhere. Cancel anytime.</p>
             <p>
               Ready to watch? Enter your email to create or restart your
               membership.
             </p>
-            <form className="signup-form">
+            <form className={styles.signupForm}>
               <input type="email" placeholder="Email address" required />
               <button type="submit">Get Started</button>
             </form>
           </div>
+          <div className={styles.fadeBottom}></div>
         </section>
-        <section className="features">
-          <div className="feature">
+        <section className={styles.features}>
+          <div className={styles.feature}>
             <h2>Enjoy on your TV</h2>
             <p>
               Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV,
               Blu-ray players, and more.
             </p>
           </div>
-          <div className="feature">
+          <div className={styles.feature}>
             <h2>Create profiles for kids</h2>
             <p>
               Send kids on adventures with their favorite characters in a space
               made just for them—free with your membership.
             </p>
           </div>
-          <div className="feature">
+          <div className={styles.feature}>
             <h2>Download your shows to watch offline</h2>
             <p>Watch on a plane, train, or submarine...</p>
           </div>
         </section>
-        <section className="faq">
+        <section className={styles.faq}>
           <h2>Frequently Asked Questions</h2>
-          <div className="faq-item">
-            <button className="faq-question">What is StreamList?</button>
-            <div className="faq-answer">
+          <div className={styles.faqItem}>
+            <button className={styles.faqQuestion}>What is StreamList?</button>
+            <div className={styles.faqAnswer}>
               <p>
                 StreamList is a platform to manage and stream your favorite
                 movies and TV shows.
               </p>
             </div>
           </div>
-          <div className="faq-item">
-            <button className="faq-question">
+          <div className={styles.faqItem}>
+            <button className={styles.faqQuestion}>
               How much does StreamList cost?
             </button>
-            <div className="faq-answer">
+            <div className={styles.faqAnswer}>
               <p>Plans range from $8.99 to $15.99 per month.</p>
             </div>
           </div>
         </section>
       </main>
-      <footer>
+      <footer className={styles.footer}>
         <p>Questions? Call 1-800-123-4567</p>
         <ul>
           <li>

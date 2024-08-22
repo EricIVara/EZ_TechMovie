@@ -1,9 +1,9 @@
-// src/components/SignIn.js
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { FaHome } from "react-icons/fa"; // Import the icon used in Navigation
 import { auth } from "../firebase";
-import "./styles/SignIn.css";
+import styles from "./styles/SignIn.module.css"; // Correctly import the CSS module
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -26,15 +26,21 @@ const SignIn = () => {
   };
 
   return (
-    <div className="signin-container">
-      <header className="signin-header">
-        <img src="/logo192.png" alt="StreamList Logo" className="logo" />
+    <div className={styles.signinContainer}>
+      <header className={styles.signinHeader}>
+        <div className={styles.logo}>
+          <FaHome className={styles.logoIcon} />
+          <Link to="/streamlist" className={styles.logoText}>
+            <span className={styles.stream}>Stream</span>
+            <span className={styles.list}>List</span>
+          </Link>
+        </div>
       </header>
-      <main className="signin-main">
-        <div className="signin-form-container">
+      <main className={styles.signinMain}>
+        <div className={styles.signinFormContainer}>
           <h1>Sign In</h1>
-          {error && <p className="error">{error}</p>}
-          <form className="signin-form" onSubmit={handleSignIn}>
+          {error && <p className={styles.error}>{error}</p>}
+          <form className={styles.signinForm} onSubmit={handleSignIn}>
             <input
               type="email"
               placeholder="Email or mobile number"
@@ -50,21 +56,21 @@ const SignIn = () => {
               required
             />
             <button type="submit">Sign In</button>
-            <div className="signin-options">
+            <div className={styles.signinOptions}>
               <a href="#">Forgot password?</a>
             </div>
-            <div className="signin-remember">
+            <div className={styles.signinRemember}>
               <input type="checkbox" id="rememberMe" />
               <label htmlFor="rememberMe">Remember me</label>
             </div>
-            <div className="signin-new">
+            <div className={styles.signinNew}>
               <span>New to StreamList? </span>
               <a onClick={handleSignUp}>Sign up now.</a>
             </div>
           </form>
         </div>
       </main>
-      <footer className="signin-footer">
+      <footer className={styles.signinFooter}>
         <p>Questions? Call 1-800-123-4567</p>
         <ul>
           <li>

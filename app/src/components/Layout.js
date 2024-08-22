@@ -2,7 +2,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom"; // Import Outlet from react-router-dom
 import Navigation from "./Navigation";
-import "./styles/Layout.css";
+import "./styles/Layout.module.css";
 
 const Layout = () => {
   return (
