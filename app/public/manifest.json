@@ -1,0 +1,21 @@
+{
+  "name": "StreamList",
+  "short_name": "StreamList",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "A movie streaming app!",
+  "icons": [
+    {
+      "src": "download-solid.svg",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "download-solid.svg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
