@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
-import styles from "./styles/StreamList.module.css"; // Importing the CSS module
+import styles from "./styles/StreamList.module.css";
 
 const StreamList = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const StreamList = () => {
   const fetchMovieSuggestions = async (query) => {
     try {
       const response = await fetch(
-        `http://www.omdbapi.com/?s=${query}&apikey=97266cde`
+        `https://www.omdbapi.com/?s=${query}&apikey=97266cde`
       );
       const data = await response.json();
       if (data.Response === "True") {
@@ -44,7 +44,7 @@ const StreamList = () => {
   const fetchMovieDetails = async (name) => {
     try {
       const response = await fetch(
-        `http://www.omdbapi.com/?t=${name}&apikey=97266cde`
+        `https://www.omdbapi.com/?t=${name}&apikey=97266cde`
       );
       const data = await response.json();
 

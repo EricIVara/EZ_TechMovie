@@ -6,7 +6,6 @@ import styles from "./styles/Navigation.module.css";
 
 const Navigation = () => {
   const [userEmail, setUserEmail] = useState(null);
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const navigate = useNavigate();
 
@@ -23,34 +22,24 @@ const Navigation = () => {
   }, []);
 
   useEffect(() => {
-    const handler = (e) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-    };
-
-    window.addEventListener("beforeinstallprompt", handler);
-
-    window.addEventListener("appinstalled", () => {
-      console.log("App installed successfully");
-      setIsInstalled(true);
-    });
-
-    return () => {
-      window.removeEventListener("beforeinstallprompt", handler);
-      window.removeEventListener("appinstalled", () => {
+    if (window.deferredPrompt) {
+      console.log("Deferred prompt available on load");
+      window.addEventListener("appinstalled", () => {
+        console.log("App is installed");
         setIsInstalled(true);
       });
-    };
+    }
   }, []);
 
   const handleInstallClick = async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
+    if (window.deferredPrompt) {
+      window.deferredPrompt.prompt();
+      const { outcome } = await window.deferredPrompt.userChoice;
+      console.log("User choice outcome:", outcome);
       if (outcome === "accepted") {
         setIsInstalled(true);
       }
-      setDeferredPrompt(null);
+      window.deferredPrompt = null;
     }
   };
 
@@ -89,7 +78,7 @@ const Navigation = () => {
         </ul>
       </div>
       <div className={styles.buttonGroup}>
-        {!isInstalled && deferredPrompt && (
+        {!isInstalled && window.deferredPrompt && (
           <button className={styles.installButton} onClick={handleInstallClick}>
             Install App
           </button>
