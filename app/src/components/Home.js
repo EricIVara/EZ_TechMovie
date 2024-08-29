@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./styles/Home.module.css"; // Correctly import the CSS module
 
 const Home = () => {
@@ -12,6 +12,12 @@ const Home = () => {
   return (
     <div className={styles.homeContainer}>
       <header className={styles.homeHeader}>
+        <div className={styles.logo}>
+          <Link to="/streamlist" className={styles.logoText}>
+            <span className={styles.stream}>Stream</span>
+            <span className={styles.list}>List</span>
+          </Link>
+        </div>
         <div className={styles.authButtons}>
           <button className={styles.signinBtn} onClick={handleSignIn}>
             Sign In

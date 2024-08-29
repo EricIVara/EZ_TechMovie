@@ -12,8 +12,6 @@ const StreamList = () => {
   const [error, setError] = useState("");
   const [addedMovies, setAddedMovies] = useState([]);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -24,37 +22,6 @@ const StreamList = () => {
 
     return () => unsubscribe();
   }, [navigate]);
-
-  useEffect(() => {
-    const handler = (e) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-    };
-
-    window.addEventListener("beforeinstallprompt", handler);
-
-    window.addEventListener("appinstalled", () => {
-      setIsInstalled(true);
-    });
-
-    return () => {
-      window.removeEventListener("beforeinstallprompt", handler);
-      window.removeEventListener("appinstalled", () => {
-        setIsInstalled(true);
-      });
-    };
-  }, []);
-
-  const handleInstallClick = async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === "accepted") {
-        setIsInstalled(true);
-      }
-      setDeferredPrompt(null);
-    }
-  };
 
   const fetchMovieSuggestions = async (query) => {
     try {
@@ -183,13 +150,6 @@ const StreamList = () => {
           </button>
         </div>
       </form>
-
-      {/* Install Button */}
-      {!isInstalled && deferredPrompt && (
-        <button className={styles.installButton} onClick={handleInstallClick}>
-          Install App
-        </button>
-      )}
 
       {addedMovies.length > 0 && (
         <div className={styles.addedMoviesList}>

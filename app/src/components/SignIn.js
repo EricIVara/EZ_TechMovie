@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { FaHome } from "react-icons/fa"; // Import the icon used in Navigation
 import { auth } from "../firebase";
 import styles from "./styles/SignIn.module.css"; // Correctly import the CSS module
 
@@ -29,7 +28,6 @@ const SignIn = () => {
     <div className={styles.signinContainer}>
       <header className={styles.signinHeader}>
         <div className={styles.logo}>
-          <FaHome className={styles.logoIcon} />
           <Link to="/streamlist" className={styles.logoText}>
             <span className={styles.stream}>Stream</span>
             <span className={styles.list}>List</span>
